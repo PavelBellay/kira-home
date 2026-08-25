@@ -12,13 +12,17 @@
 
 <style>
 
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 :root {
     --bg: #070c0a;
     --room: #0d1511;
     --room2: #111c16;
 
     --green: #9bc3a7;
-    --green-bright: #b9d8c3;
+    --green-bright: #c1dfca;
 
     --pink: #d2a8bd;
     --blue: #a6c9d9;
@@ -31,9 +35,9 @@
 }
 
 
-/* =========================
+/* =========================================================
    RESET
-========================= */
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -48,68 +52,57 @@ html {
 body {
     background: var(--bg);
     color: var(--text);
-
     font-family: "Manrope", sans-serif;
-
     overflow-x: hidden;
+    transition: background 1.5s ease, filter 1.5s ease;
+}
+
+button {
+    font-family: inherit;
 }
 
 
-/* =========================
+/* =========================================================
    AMBIENT LIGHT
-========================= */
+========================================================= */
 
 .ambient {
     position: fixed;
     inset: 0;
-
     pointer-events: none;
-
     overflow: hidden;
-
     z-index: 0;
 }
 
 .glow {
     position: absolute;
-
     width: 600px;
     height: 600px;
-
     border-radius: 50%;
-
     filter: blur(120px);
-
     opacity: .07;
 }
 
 .glow.green {
     background: #75b38b;
-
     left: -300px;
     top: -250px;
-
     animation: greenFloat 24s ease-in-out infinite alternate;
 }
 
 .glow.pink {
     background: #d497b5;
-
     right: -350px;
     top: 20%;
-
     animation: pinkFloat 28s ease-in-out infinite alternate;
 }
 
 .glow.blue {
     background: #8dbed3;
-
     left: 30%;
     bottom: -400px;
-
     animation: blueFloat 32s ease-in-out infinite alternate;
 }
-
 
 @keyframes greenFloat {
     to {
@@ -130,19 +123,16 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    HEADER
-========================= */
+========================================================= */
 
 header {
     position: fixed;
-
     top: 0;
     left: 0;
     right: 0;
-
     height: 68px;
-
     padding: 0 5vw;
 
     display: flex;
@@ -150,7 +140,6 @@ header {
     justify-content: space-between;
 
     background: rgba(7, 12, 10, .55);
-
     backdrop-filter: blur(22px);
 
     border-bottom: 1px solid rgba(255,255,255,.025);
@@ -160,26 +149,21 @@ header {
 
 .logo {
     color: var(--green);
-
     font-size: 12px;
-
     letter-spacing: .12em;
 }
 
 .clock {
     color: var(--muted);
-
     font-size: 11px;
-
     text-align: right;
-
     line-height: 1.45;
 }
 
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
     min-height: 100vh;
@@ -200,11 +184,8 @@ header {
 
 .nickname {
     color: var(--green);
-
     font-size: 12px;
-
     letter-spacing: .12em;
-
     margin-bottom: 30px;
 
     animation: appear 1.4s ease forwards;
@@ -218,7 +199,6 @@ header {
     font-weight: 400;
 
     letter-spacing: -.06em;
-
     line-height: .9;
 
     margin-bottom: 35px;
@@ -266,9 +246,21 @@ header {
     opacity: 0;
 }
 
-.hero button {
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+
     margin-top: 40px;
 
+    animation: appear 1.5s ease .55s forwards;
+
+    opacity: 0;
+}
+
+.hero button,
+.primary-button {
     padding: 14px 26px;
 
     border-radius: 100px;
@@ -279,23 +271,22 @@ header {
 
     color: var(--text);
 
-    font-family: inherit;
-
     cursor: pointer;
 
     transition: .35s;
-
-    animation: appear 1.5s ease .55s forwards;
-
-    opacity: 0;
 }
 
-.hero button:hover {
+.hero button:hover,
+.primary-button:hover {
     transform: translateY(-3px);
 
     background: rgba(160,200,175,.11);
 
     border-color: rgba(170,210,190,.3);
+}
+
+.discord-button {
+    border-color: rgba(210,168,189,.18) !important;
 }
 
 @keyframes appear {
@@ -311,31 +302,39 @@ header {
 }
 
 
-/* =========================
-   ROOM SECTION
-========================= */
+/* =========================================================
+   COMMON SECTIONS
+========================================================= */
 
-.room-section {
+.room-section,
+.time-section,
+.dota-section,
+.care-section,
+.breathe-section,
+.light-section {
     position: relative;
-
     z-index: 2;
+}
 
-    padding: 80px 0 140px;
+.section-intro,
+.time-section,
+.dota-section,
+.care-section,
+.breathe-section,
+.light-section {
+    width: min(1000px, 88%);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .section-intro {
-    width: min(1000px, 88%);
-
-    margin: 0 auto 45px;
+    margin-bottom: 45px;
 }
 
 .section-number {
     color: var(--green);
-
     font-size: 11px;
-
     letter-spacing: .15em;
-
     margin-bottom: 15px;
 }
 
@@ -362,9 +361,13 @@ header {
 }
 
 
-/* =========================
+/* =========================================================
    ROOM
-========================= */
+========================================================= */
+
+.room-section {
+    padding: 80px 0 140px;
+}
 
 .room {
     width: min(1000px, 92%);
@@ -393,11 +396,6 @@ header {
         inset 0 0 100px rgba(100,150,120,.025);
 }
 
-
-/* =========================
-   ROOM LIGHT
-========================= */
-
 .room::before {
     content: "";
 
@@ -424,28 +422,16 @@ header {
 }
 
 @keyframes roomLight {
-
     from {
         opacity: .5;
-
-        transform:
-            translateX(-50%)
-            scale(.9);
+        transform: translateX(-50%) scale(.9);
     }
 
     to {
         opacity: 1;
-
-        transform:
-            translateX(-50%)
-            scale(1.1);
+        transform: translateX(-50%) scale(1.1);
     }
 }
-
-
-/* =========================
-   FLOOR
-========================= */
 
 .floor {
     position: absolute;
@@ -467,9 +453,9 @@ header {
 }
 
 
-/* =========================
+/* =========================================================
    WINDOW
-========================= */
+========================================================= */
 
 .window {
     position: absolute;
@@ -513,12 +499,10 @@ header {
             transparent 60%
         );
 
-    animation:
-        windowGlow 9s ease-in-out infinite;
+    animation: windowGlow 9s ease-in-out infinite;
 }
 
 @keyframes windowGlow {
-
     0%,100% {
         transform: translateX(-100%);
     }
@@ -529,9 +513,9 @@ header {
 }
 
 
-/* =========================
-   OBJECTS
-========================= */
+/* =========================================================
+   ROOM OBJECTS
+========================================================= */
 
 .object {
     position: absolute;
@@ -577,22 +561,25 @@ header {
 }
 
 
-/* =========================
-   PLANT
-========================= */
+/* Plant */
 
 .plant {
     left: 80px;
-
     bottom: 90px;
-
     font-size: 80px;
 }
 
 
-/* =========================
-   SOFA
-========================= */
+/* Lamp */
+
+.lamp {
+    left: 50px;
+    top: 70px;
+    font-size: 35px;
+}
+
+
+/* Sofa */
 
 .sofa {
     left: 50%;
@@ -641,15 +628,11 @@ header {
 }
 
 
-/* =========================
-   COMPUTER
-========================= */
+/* Computer */
 
 .computer {
     right: 85px;
-
     bottom: 85px;
-
     width: 145px;
 }
 
@@ -690,13 +673,10 @@ header {
 }
 
 
-/* =========================
-   DESK
-========================= */
+/* Desk */
 
 .desk {
     right: 60px;
-
     bottom: 58px;
 
     width: 195px;
@@ -708,13 +688,10 @@ header {
 }
 
 
-/* =========================
-   NOTEBOOK
-========================= */
+/* Notebook */
 
 .notebook {
     left: 50px;
-
     bottom: 45px;
 
     font-size: 38px;
@@ -723,22 +700,7 @@ header {
 }
 
 
-/* =========================
-   LAMP
-========================= */
-
-.lamp {
-    left: 50px;
-
-    top: 70px;
-
-    font-size: 35px;
-}
-
-
-/* =========================
-   ROOM MESSAGE
-========================= */
+/* Room message */
 
 .room-message {
     position: absolute;
@@ -778,118 +740,88 @@ header {
 }
 
 
-/* =========================
-   MODAL
-========================= */
+/* =========================================================
+   DISCORD LINK
+========================================================= */
 
-.modal {
-    position: fixed;
+.discord-room {
+    width: min(1000px, 92%);
 
-    inset: 0;
+    margin: 25px auto 0;
 
     display: flex;
-
     align-items: center;
+    justify-content: space-between;
 
-    justify-content: center;
+    gap: 25px;
 
-    padding: 20px;
+    padding: 22px 28px;
 
-    background: rgba(3,7,5,.72);
-
-    backdrop-filter: blur(18px);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition: .35s;
-
-    z-index: 200;
-}
-
-.modal.open {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-.modal-box {
-    width: min(560px, 100%);
-
-    padding: 45px;
-
-    border-radius: 28px;
+    border-radius: 22px;
 
     background:
         linear-gradient(
-            145deg,
-            rgba(24,39,31,.95),
-            rgba(12,20,16,.97)
+            100deg,
+            rgba(150,190,165,.055),
+            rgba(210,168,189,.045),
+            rgba(166,201,217,.04)
         );
 
-    border: 1px solid rgba(180,215,195,.12);
-
-    box-shadow:
-        0 40px 100px rgba(0,0,0,.55);
-
-    transform: translateY(20px);
-
-    transition: .4s;
+    border: 1px solid var(--border);
 }
 
-.modal.open .modal-box {
-    transform: translateY(0);
-}
+.discord-room-text strong {
+    display: block;
 
-.modal-icon {
-    font-size: 32px;
-
-    margin-bottom: 20px;
-}
-
-.modal h3 {
     font-family: "Playfair Display", serif;
 
-    font-size: 32px;
+    font-size: 20px;
 
     font-weight: 400;
-
-    margin-bottom: 15px;
 }
 
-.modal p {
+.discord-room-text span {
+    display: block;
+
     color: var(--muted);
 
-    line-height: 1.8;
+    font-size: 11px;
 
-    font-size: 14px;
+    margin-top: 5px;
 }
 
-.close {
-    margin-top: 30px;
+.discord-room a {
+    flex-shrink: 0;
 
-    background: none;
+    text-decoration: none;
 
-    border: none;
+    color: var(--text);
 
-    color: var(--green);
+    padding: 11px 18px;
 
-    font-family: inherit;
+    border-radius: 100px;
 
-    cursor: pointer;
+    border: 1px solid rgba(210,168,189,.15);
+
+    background: rgba(210,168,189,.05);
+
+    font-size: 12px;
+
+    transition: .3s;
+}
+
+.discord-room a:hover {
+    transform: translateY(-2px);
+
+    background: rgba(210,168,189,.10);
 }
 
 
-/* =========================
+/* =========================================================
    TIME
-========================= */
+========================================================= */
 
 .time-section {
-    width: min(1000px, 88%);
-
-    margin: auto;
-
     padding: 140px 0;
 }
 
@@ -939,27 +871,372 @@ header {
 
 .time-card small {
     color: var(--muted);
-
     font-size: 11px;
 }
 
 .time-arrow {
     color: var(--pink);
-
     opacity: .7;
 }
 
 
-/* =========================
+/* =========================================================
+   CARE
+========================================================= */
+
+.care-section {
+    padding: 80px 0 140px;
+}
+
+.care-grid {
+    margin-top: 50px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px;
+}
+
+.care-card {
+    position: relative;
+
+    padding: 38px;
+
+    min-height: 260px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(150,190,165,.055),
+            rgba(20,32,26,.75)
+        );
+
+    border: 1px solid var(--border);
+
+    overflow: hidden;
+
+    transition: .4s;
+}
+
+.care-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(185,220,200,.16);
+}
+
+.care-icon {
+    font-size: 30px;
+
+    margin-bottom: 25px;
+}
+
+.care-card h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 28px;
+
+    font-weight: 400;
+
+    margin-bottom: 13px;
+}
+
+.care-card p {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    line-height: 1.8;
+}
+
+.care-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 25px;
+}
+
+.soft-button {
+    padding: 9px 15px;
+
+    border-radius: 100px;
+
+    border: 1px solid rgba(185,220,200,.10);
+
+    background: rgba(185,220,200,.035);
+
+    color: var(--text);
+
+    cursor: pointer;
+
+    font-size: 11px;
+
+    transition: .3s;
+}
+
+.soft-button:hover {
+    background: rgba(185,220,200,.08);
+}
+
+
+/* =========================================================
+   BREATHING
+========================================================= */
+
+.breathe-section {
+    padding: 80px 0 150px;
+
+    text-align: center;
+}
+
+.breathe-section .section-description {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.breathing-box {
+    margin: 55px auto 0;
+
+    width: min(620px, 100%);
+
+    padding: 55px 30px;
+
+    border-radius: 32px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(150,190,165,.06),
+            rgba(10,17,13,.65) 60%
+        );
+
+    border: 1px solid var(--border);
+}
+
+.breath-circle {
+    width: 150px;
+    height: 150px;
+
+    margin: 0 auto 35px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(210,168,189,.30),
+            rgba(166,201,217,.15) 40%,
+            rgba(150,190,165,.08) 70%,
+            transparent 75%
+        );
+
+    box-shadow:
+        0 0 60px rgba(166,201,217,.06);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        transform 4s ease-in-out,
+        box-shadow 4s ease-in-out;
+}
+
+.breath-circle.inhale {
+    transform: scale(1.35);
+
+    box-shadow:
+        0 0 100px rgba(166,201,217,.12);
+}
+
+.breath-circle.exhale {
+    transform: scale(.8);
+}
+
+.breath-label {
+    color: #c8d9cf;
+
+    font-family: "Playfair Display", serif;
+
+    font-size: 24px;
+}
+
+.breath-status {
+    min-height: 25px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.breath-controls {
+    margin-top: 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.breath-timer {
+    margin-top: 20px;
+
+    color: rgba(185,220,200,.45);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   LIGHT INTERACTION
+========================================================= */
+
+.light-section {
+    padding: 70px 0 150px;
+
+    text-align: center;
+}
+
+.light-section .section-description {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.light-field {
+    position: relative;
+
+    width: 100%;
+    height: 390px;
+
+    margin-top: 50px;
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    cursor: crosshair;
+
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(150,190,165,.055),
+            transparent 30%
+        ),
+        #090f0c;
+
+    border: 1px solid var(--border);
+
+    touch-action: none;
+}
+
+.light-orb {
+    position: absolute;
+
+    width: 170px;
+    height: 170px;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255,220,235,.38),
+            rgba(210,168,189,.18) 25%,
+            rgba(166,201,217,.14) 45%,
+            rgba(150,190,165,.08) 60%,
+            transparent 72%
+        );
+
+    filter: blur(2px);
+
+    box-shadow:
+        0 0 90px rgba(190,175,200,.08);
+
+    pointer-events: none;
+
+    transition:
+        left 1.5s ease,
+        top 1.5s ease,
+        transform .8s ease;
+}
+
+.light-field.active .light-orb {
+    transform:
+        translate(-50%, -50%)
+        scale(1.35);
+}
+
+.light-hint {
+    position: absolute;
+
+    left: 50%;
+    bottom: 28px;
+
+    transform: translateX(-50%);
+
+    color: rgba(220,230,225,.42);
+
+    font-size: 11px;
+
+    pointer-events: none;
+}
+
+.light-particle {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: rgba(210,190,205,.55);
+
+    pointer-events: none;
+
+    animation: particleFloat 2.2s ease-out forwards;
+}
+
+@keyframes particleFloat {
+    from {
+        opacity: .8;
+
+        transform:
+            translate(0,0)
+            scale(1);
+    }
+
+    to {
+        opacity: 0;
+
+        transform:
+            translate(
+                var(--x),
+                var(--y)
+            )
+            scale(.2);
+    }
+}
+
+
+/* =========================================================
    DOTA
-========================= */
+========================================================= */
 
 .dota-section {
-    width: min(1000px, 88%);
-
-    margin: auto;
-
-    padding: 80px 0 140px;
+    padding: 50px 0 140px;
 }
 
 .dota-card {
@@ -1064,9 +1341,9 @@ header {
 }
 
 
-/* =========================
+/* =========================================================
    APOLOGY
-========================= */
+========================================================= */
 
 .apology {
     width: min(800px, 88%);
@@ -1097,9 +1374,51 @@ header {
 }
 
 
-/* =========================
+/* =========================================================
+   HARD MOMENT
+========================================================= */
+
+.hard-section {
+    width: min(800px, 88%);
+
+    margin: auto;
+
+    padding: 80px 0 130px;
+
+    text-align: center;
+}
+
+.hard-button {
+    padding: 16px 25px;
+
+    border-radius: 100px;
+
+    border: 1px solid rgba(210,168,189,.13);
+
+    background:
+        rgba(210,168,189,.035);
+
+    color: #c9d5ce;
+
+    cursor: pointer;
+
+    transition: .4s;
+}
+
+.hard-button:hover {
+    transform: translateY(-3px);
+
+    background:
+        rgba(210,168,189,.075);
+
+    border-color:
+        rgba(210,168,189,.25);
+}
+
+
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer {
     padding: 80px 20px 110px;
@@ -1128,11 +1447,183 @@ footer span:hover {
 }
 
 
-/* =========================
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(3,7,5,.72);
+
+    backdrop-filter: blur(18px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: .35s;
+
+    z-index: 200;
+}
+
+.modal.open {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+.modal-box {
+    width: min(560px, 100%);
+
+    padding: 45px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(24,39,31,.95),
+            rgba(12,20,16,.97)
+        );
+
+    border: 1px solid rgba(180,215,195,.12);
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.55);
+
+    transform: translateY(20px);
+
+    transition: .4s;
+}
+
+.modal.open .modal-box {
+    transform: translateY(0);
+}
+
+.modal-icon {
+    font-size: 32px;
+
+    margin-bottom: 20px;
+}
+
+.modal h3 {
+    font-family: "Playfair Display", serif;
+
+    font-size: 32px;
+
+    font-weight: 400;
+
+    margin-bottom: 15px;
+}
+
+.modal p {
+    color: var(--muted);
+
+    line-height: 1.8;
+
+    font-size: 14px;
+}
+
+.close {
+    margin-top: 30px;
+
+    background: none;
+
+    border: none;
+
+    color: var(--green);
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LIGHTS OUT MODE
+========================================================= */
+
+body.lights-out {
+    background: #020403;
+}
+
+body.lights-out .ambient,
+body.lights-out header,
+body.lights-out .hero,
+body.lights-out .room-section,
+body.lights-out .time-section,
+body.lights-out .care-section,
+body.lights-out .breathe-section,
+body.lights-out .light-section,
+body.lights-out .dota-section,
+body.lights-out .apology,
+body.lights-out .hard-section,
+body.lights-out footer {
+    filter: brightness(.28);
+}
+
+body.lights-out .lights-button {
+    filter: brightness(1.8);
+}
+
+.lights-button {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    z-index: 150;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(185,220,200,.10);
+
+    background: rgba(12,20,16,.8);
+
+    color: #bcd0c3;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(15px);
+
+    transition: .4s;
+}
+
+.lights-button:hover {
+    transform: scale(1.08);
+}
+
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media(max-width: 700px) {
+
+    .hero h1 {
+        font-size: 65px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: min(280px, 100%);
+    }
+
+    .hero button {
+        width: 100%;
+    }
 
     .room {
         height: 500px;
@@ -1172,6 +1663,16 @@ footer span:hover {
         font-size: 22px;
     }
 
+    .discord-room {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .discord-room a {
+        width: 100%;
+        text-align: center;
+    }
+
     .time-grid {
         grid-template-columns: 1fr;
     }
@@ -1180,9 +1681,40 @@ footer span:hover {
         display: none;
     }
 
+    .care-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .care-card {
+        min-height: auto;
+    }
+
     .modal-box {
         padding: 32px;
     }
+
+    .light-field {
+        height: 320px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+
 }
 
 </style>
@@ -1192,9 +1724,9 @@ footer span:hover {
 <body>
 
 
-<!-- =========================
-     AMBIENT LIGHT
-========================= -->
+<!-- =======================================================
+     AMBIENT
+======================================================= -->
 
 <div class="ambient">
 
@@ -1205,9 +1737,9 @@ footer span:hover {
 </div>
 
 
-<!-- =========================
+<!-- =======================================================
      HEADER
-========================= -->
+======================================================= -->
 
 <header>
 
@@ -1230,9 +1762,9 @@ footer span:hover {
 </header>
 
 
-<!-- =========================
+<!-- =======================================================
      HERO
-========================= -->
+======================================================= -->
 
 <section class="hero">
 
@@ -1257,18 +1789,31 @@ footer span:hover {
 
     </p>
 
-    <button
-        onclick="document.getElementById('roomSection').scrollIntoView()"
-    >
-        войти в домик ↓
-    </button>
+
+    <div class="hero-buttons">
+
+        <button
+            onclick="document.getElementById('roomSection').scrollIntoView()"
+        >
+            войти в домик ↓
+        </button>
+
+
+        <button
+            class="discord-button"
+            onclick="openDiscord()"
+        >
+            🏠 в наш Discord
+        </button>
+
+    </div>
 
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
      ROOM
-========================= -->
+======================================================= -->
 
 <section
     class="room-section"
@@ -1300,8 +1845,6 @@ footer span:hover {
 
         <div class="floor"></div>
 
-
-        <!-- Window -->
 
         <div class="window"></div>
 
@@ -1362,8 +1905,6 @@ footer span:hover {
         </div>
 
 
-        <!-- Desk -->
-
         <div class="desk"></div>
 
 
@@ -1381,8 +1922,6 @@ footer span:hover {
         </div>
 
 
-        <!-- Center -->
-
         <div class="room-message">
 
             <strong>
@@ -1397,12 +1936,40 @@ footer span:hover {
 
     </div>
 
+
+    <!-- Discord -->
+
+    <div class="discord-room">
+
+        <div class="discord-room-text">
+
+            <strong>
+                Наш домик
+            </strong>
+
+            <span>
+                он всё ещё там, даже когда между нами двенадцать часов
+            </span>
+
+        </div>
+
+
+        <a
+            href="https://discord.com/channels/1172818911998255175/1525792552056262798"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            зайти в домик →
+        </a>
+
+    </div>
+
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
      TIME
-========================= -->
+======================================================= -->
 
 <section class="time-section">
 
@@ -1472,14 +2039,265 @@ footer span:hover {
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
+     CARE
+======================================================= -->
+
+<section class="care-section">
+
+    <div class="section-number">
+        03 · МАЛЕНЬКАЯ ЗАБОТА
+    </div>
+
+    <div class="section-title">
+        Ничего героического
+    </div>
+
+    <div class="section-description">
+
+        Иногда забота о себе выглядит совершенно
+        неинтересно. Поесть. Попить. Лечь спать.
+        И этого уже достаточно.
+
+    </div>
+
+
+    <div class="care-grid">
+
+
+        <!-- Food -->
+
+        <div class="care-card">
+
+            <div class="care-icon">
+                🍵
+            </div>
+
+            <h3>
+                Ты сегодня ел?
+            </h3>
+
+            <p>
+                Не обязательно готовить что-то большое.
+                Если ты ещё ничего не ел - может быть,
+                сейчас стоит найти что-нибудь подходящее
+                и немного позаботиться о себе.
+            </p>
+
+
+            <div class="care-buttons">
+
+                <button
+                    class="soft-button"
+                    onclick="careFood('yes')"
+                >
+                    да 🌿
+                </button>
+
+                <button
+                    class="soft-button"
+                    onclick="careFood('notyet')"
+                >
+                    пока нет
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Sleep -->
+
+        <div class="care-card">
+
+            <div class="care-icon">
+                🌙
+            </div>
+
+            <h3>
+                Уже поздно?
+            </h3>
+
+            <p>
+                Если день закончился, не обязательно
+                продолжать его ещё несколько часов.
+                Некоторые вещи вполне могут подождать
+                до завтра.
+            </p>
+
+
+            <div class="care-buttons">
+
+                <button
+                    class="soft-button"
+                    onclick="lightsOut()"
+                >
+                    выключить свет 🌙
+                </button>
+
+                <button
+                    class="soft-button"
+                    onclick="openModal(
+                        '🌙',
+                        'До завтра',
+                        'Сегодня уже достаточно.<br><br>Остальное можно оставить на завтра.<br><br>Спокойной ночи, Кира.'
+                    )"
+                >
+                    пока просто здесь
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     BREATHING
+======================================================= -->
+
+<section class="breathe-section">
+
+    <div class="section-number">
+        04 · НЕМНОГО ТИШЕ
+    </div>
+
+    <div class="section-title">
+        Давай подышим
+    </div>
+
+    <div class="section-description">
+
+        Ничего не надо исправлять.
+        Ничего не надо решать.
+
+        <br><br>
+
+        Просто несколько спокойных вдохов.
+
+    </div>
+
+
+    <div class="breathing-box">
+
+        <div
+            class="breath-circle"
+            id="breathCircle"
+        >
+
+            <div
+                class="breath-label"
+                id="breathLabel"
+            >
+                готов?
+            </div>
+
+        </div>
+
+
+        <div
+            class="breath-status"
+            id="breathStatus"
+        >
+            когда захочешь - начинай
+        </div>
+
+
+        <div class="breath-controls">
+
+            <button
+                class="soft-button"
+                onclick="startBreathing(30)"
+            >
+                30 секунд
+            </button>
+
+            <button
+                class="soft-button"
+                onclick="startBreathing(60)"
+            >
+                1 минута
+            </button>
+
+            <button
+                class="soft-button"
+                onclick="startBreathing(120)"
+            >
+                2 минуты
+            </button>
+
+        </div>
+
+
+        <div
+            class="breath-timer"
+            id="breathTimer"
+        >
+            —
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     LIGHT
+======================================================= -->
+
+<section class="light-section">
+
+    <div class="section-number">
+        05 · НИЧЕГО НЕ НУЖНО
+    </div>
+
+    <div class="section-title">
+        Потянись к свету
+    </div>
+
+    <div class="section-description">
+
+        Здесь нет цели.
+        Нет очков.
+        Нет проигрыша.
+
+        <br><br>
+
+        Просто потрогай свет.
+
+    </div>
+
+
+    <div
+        class="light-field"
+        id="lightField"
+    >
+
+        <div
+            class="light-orb"
+            id="lightOrb"
+        ></div>
+
+        <div class="light-hint">
+            двигай мышью или пальцем
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
      DOTA
-========================= -->
+======================================================= -->
 
 <section class="dota-section">
 
     <div class="section-number">
-        03 · НОВАЯ ИГРА
+        06 · НОВАЯ ИГРА
     </div>
 
     <div class="section-title">
@@ -1546,9 +2364,9 @@ footer span:hover {
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
      APOLOGY
-========================= -->
+======================================================= -->
 
 <section class="apology">
 
@@ -1557,7 +2375,6 @@ footer span:hover {
         Hey, I'm sorry for saying sorry so much.
 
     </div>
-
 
     <div class="apology-sub">
 
@@ -1568,9 +2385,25 @@ footer span:hover {
 </section>
 
 
-<!-- =========================
+<!-- =======================================================
+     HARD MOMENT
+======================================================= -->
+
+<section class="hard-section">
+
+    <button
+        class="hard-button"
+        onclick="hardMoment()"
+    >
+        мне сейчас тяжело
+    </button>
+
+</section>
+
+
+<!-- =======================================================
      FOOTER
-========================= -->
+======================================================= -->
 
 <footer>
 
@@ -1578,18 +2411,16 @@ footer span:hover {
         для Киры · Двуликой Дихотомии
     </div>
 
-    <span
-        onclick="secretMessage()"
-    >
+    <span onclick="secretMessage()">
         ·
     </span>
 
 </footer>
 
 
-<!-- =========================
+<!-- =======================================================
      MODAL
-========================= -->
+======================================================= -->
 
 <div
     class="modal"
@@ -1626,15 +2457,54 @@ footer span:hover {
 </div>
 
 
+<!-- =======================================================
+     LIGHTS OUT BUTTON
+======================================================= -->
+
+<button
+    class="lights-button"
+    onclick="lightsOut()"
+    title="выключить свет"
+>
+    ◐
+</button>
+
+
 <script>
 
+/* =========================================================
+   DISCORD
+========================================================= */
 
-/* =========================
+const DISCORD_HOME =
+    "https://discord.com/channels/1172818911998255175/1525792552056262798";
+
+
+function openDiscord() {
+
+    window.open(
+        DISCORD_HOME,
+        "_blank",
+        "noopener,noreferrer"
+    );
+
+}
+
+
+/* =========================================================
    TIME
-========================= */
+========================================================= */
 
 const MY_TIMEZONE =
     "America/New_York";
+
+
+/*
+    Сейчас поставлено UTC+8.
+
+    Если Кира находится в другом часовом поясе,
+    здесь можно поменять значение.
+*/
 
 const HER_TIMEZONE =
     "Etc/GMT-8";
@@ -1740,9 +2610,9 @@ updateTime();
 setInterval(updateTime, 1000);
 
 
-/* =========================
+/* =========================================================
    MODAL
-========================= */
+========================================================= */
 
 function openModal(icon, title, text) {
 
@@ -1757,6 +2627,7 @@ function openModal(icon, title, text) {
 
     document.getElementById("modal")
         .classList.add("open");
+
 }
 
 
@@ -1789,9 +2660,417 @@ document.addEventListener(
 );
 
 
-/* =========================
+/* =========================================================
+   FOOD
+========================================================= */
+
+function careFood(answer) {
+
+    if (answer === "yes") {
+
+        openModal(
+            "🌿",
+            "Хорошо.",
+            "Тогда хотя бы с этим сегодня всё.<br><br>Можно идти дальше."
+        );
+
+        return;
+    }
+
+
+    openModal(
+        "🍵",
+        "Тогда маленький шаг.",
+        "Не нужно устраивать из этого большую задачу.<br><br>Найди что-нибудь, что тебе сейчас подходит и хочется съесть.<br><br>А потом можно снова вернуться сюда."
+    );
+
+}
+
+
+/* =========================================================
+   BREATHING
+========================================================= */
+
+let breathingInterval = null;
+let breathingTimeout = null;
+let breathingRunning = false;
+
+
+function startBreathing(duration) {
+
+    clearInterval(breathingInterval);
+    clearTimeout(breathingTimeout);
+
+    const circle =
+        document.getElementById("breathCircle");
+
+    const label =
+        document.getElementById("breathLabel");
+
+    const status =
+        document.getElementById("breathStatus");
+
+    const timer =
+        document.getElementById("breathTimer");
+
+
+    breathingRunning = true;
+
+
+    let remaining = duration;
+
+
+    function updateTimer() {
+
+        timer.textContent =
+            remaining + " сек.";
+
+    }
+
+
+    updateTimer();
+
+
+    function inhale() {
+
+        circle.classList.remove("exhale");
+
+        circle.classList.add("inhale");
+
+        label.textContent = "вдох";
+
+        status.textContent =
+            "медленно";
+
+
+        setTimeout(() => {
+
+            if (!breathingRunning) return;
+
+            circle.classList.remove("inhale");
+
+            label.textContent = "пауза";
+
+            status.textContent =
+                "просто побудь здесь";
+
+        }, 4000);
+
+
+        setTimeout(() => {
+
+            if (!breathingRunning) return;
+
+            circle.classList.add("exhale");
+
+            label.textContent = "выдох";
+
+            status.textContent =
+                "ещё медленнее";
+
+        }, 5500);
+
+    }
+
+
+    inhale();
+
+
+    breathingInterval =
+        setInterval(() => {
+
+            remaining--;
+
+            updateTimer();
+
+
+            if (remaining <= 0) {
+
+                stopBreathing();
+
+            }
+
+        }, 1000);
+
+
+    breathingTimeout =
+        setInterval(() => {
+
+            if (!breathingRunning) return;
+
+            inhale();
+
+        }, 8500);
+
+}
+
+
+function stopBreathing() {
+
+    clearInterval(breathingInterval);
+    clearInterval(breathingTimeout);
+
+    breathingRunning = false;
+
+
+    const circle =
+        document.getElementById("breathCircle");
+
+    const label =
+        document.getElementById("breathLabel");
+
+    const status =
+        document.getElementById("breathStatus");
+
+    const timer =
+        document.getElementById("breathTimer");
+
+
+    circle.classList.remove(
+        "inhale",
+        "exhale"
+    );
+
+
+    label.textContent = "готово";
+
+    status.textContent =
+        "Вот. Этого достаточно.";
+
+    timer.textContent = "♥";
+
+}
+
+
+/* =========================================================
+   LIGHT INTERACTION
+========================================================= */
+
+const lightField =
+    document.getElementById("lightField");
+
+const lightOrb =
+    document.getElementById("lightOrb");
+
+
+function moveLight(clientX, clientY) {
+
+    const rect =
+        lightField.getBoundingClientRect();
+
+
+    let x =
+        ((clientX - rect.left) / rect.width) * 100;
+
+    let y =
+        ((clientY - rect.top) / rect.height) * 100;
+
+
+    x = Math.max(10, Math.min(90, x));
+
+    y = Math.max(12, Math.min(88, y));
+
+
+    lightOrb.style.left = x + "%";
+
+    lightOrb.style.top = y + "%";
+
+}
+
+
+lightField.addEventListener(
+    "mousemove",
+    function(event) {
+
+        moveLight(
+            event.clientX,
+            event.clientY
+        );
+
+    }
+);
+
+
+lightField.addEventListener(
+    "pointermove",
+    function(event) {
+
+        if (event.pointerType === "touch") {
+
+            moveLight(
+                event.clientX,
+                event.clientY
+            );
+
+        }
+
+    }
+);
+
+
+lightField.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        moveLight(
+            event.clientX,
+            event.clientY
+        );
+
+
+        lightField.classList.add("active");
+
+
+        for (
+            let i = 0;
+            i < 10;
+            i++
+        ) {
+
+            createParticle(
+                event.clientX,
+                event.clientY
+            );
+
+        }
+
+
+        setTimeout(() => {
+
+            lightField.classList.remove("active");
+
+        }, 700);
+
+    }
+);
+
+
+function createParticle(clientX, clientY) {
+
+    const rect =
+        lightField.getBoundingClientRect();
+
+
+    const particle =
+        document.createElement("div");
+
+
+    particle.className =
+        "light-particle";
+
+
+    particle.style.left =
+        (clientX - rect.left) + "px";
+
+
+    particle.style.top =
+        (clientY - rect.top) + "px";
+
+
+    particle.style.setProperty(
+        "--x",
+        (Math.random() * 100 - 50) + "px"
+    );
+
+
+    particle.style.setProperty(
+        "--y",
+        (Math.random() * 100 - 50) + "px"
+    );
+
+
+    lightField.appendChild(particle);
+
+
+    setTimeout(() => {
+
+        particle.remove();
+
+    }, 2300);
+
+}
+
+
+/* =========================================================
+   LIGHTS OUT
+========================================================= */
+
+let lightsOutTimer = null;
+
+
+function lightsOut() {
+
+    document.body.classList.toggle(
+        "lights-out"
+    );
+
+
+    const isDark =
+        document.body.classList.contains(
+            "lights-out"
+        );
+
+
+    const button =
+        document.querySelector(
+            ".lights-button"
+        );
+
+
+    if (isDark) {
+
+        button.textContent = "☼";
+
+        button.title = "включить свет";
+
+
+        clearTimeout(lightsOutTimer);
+
+
+        lightsOutTimer =
+            setTimeout(() => {
+
+                document.body.classList.remove(
+                    "lights-out"
+                );
+
+                button.textContent = "◐";
+
+                button.title = "выключить свет";
+
+            }, 180000);
+
+    } else {
+
+        button.textContent = "◐";
+
+        button.title = "выключить свет";
+
+        clearTimeout(lightsOutTimer);
+
+    }
+
+}
+
+
+/* =========================================================
+   HARD MOMENT
+========================================================= */
+
+function hardMoment() {
+
+    openModal(
+        "🌿",
+        "Эй.",
+        "Не надо сейчас всё решать.<br><br>Не надо становиться лучше прямо сейчас.<br><br>Можно просто остаться здесь.<br><br>Я всё ещё здесь.<br><br>И если захочешь - можно зайти в наш домик.<br><br><a href=\"https://discord.com/channels/1172818911998255175/1525792552056262798\" target=\"_blank\" style=\"color:#9bc3a7;text-decoration:none;\">🏠 пойти в домик →</a>"
+    );
+
+}
+
+
+/* =========================================================
    SECRET MESSAGE
-========================= */
+========================================================= */
 
 function secretMessage() {
 
