@@ -308,7 +308,6 @@ header {
 
 .room-section,
 .time-section,
-.dota-section,
 .care-section,
 .breathe-section,
 .light-section {
@@ -318,7 +317,6 @@ header {
 
 .section-intro,
 .time-section,
-.dota-section,
 .care-section,
 .breathe-section,
 .light-section {
@@ -1232,112 +1230,184 @@ header {
 
 
 /* =========================================================
-   DOTA
+   TIME CALCULATOR
 ========================================================= */
 
-.dota-section {
-    padding: 50px 0 140px;
-}
-
-.dota-card {
-    margin-top: 50px;
-
-    padding: 45px;
-
+.time-calculator {
+    margin-top: 28px;
+    padding: 32px;
     border-radius: 28px;
-
     background:
-        linear-gradient(
-            130deg,
-            rgba(120,165,140,.07),
-            rgba(170,140,170,.05),
-            rgba(120,170,190,.06)
+        linear-gradient(130deg,
+            rgba(150,190,165,.045),
+            rgba(210,168,189,.035),
+            rgba(166,201,217,.04)
         );
-
     border: 1px solid var(--border);
-
-    position: relative;
-
-    overflow: hidden;
 }
 
-.dota-card::after {
-    content: "DOTA";
-
-    position: absolute;
-
-    right: -20px;
-    bottom: -55px;
-
-    font-size: 150px;
-
-    font-weight: 700;
-
-    color: rgba(150,190,165,.025);
-
-    pointer-events: none;
-}
-
-.dota-title {
+.time-calculator-title {
     font-family: "Playfair Display", serif;
-
-    font-size: 35px;
-
-    margin-bottom: 12px;
-}
-
-.dota-text {
-    max-width: 600px;
-
-    color: var(--muted);
-
-    line-height: 1.8;
-
-    font-size: 13px;
-}
-
-.dota-progress {
-    margin-top: 35px;
-}
-
-.progress-label {
-    display: flex;
-
-    justify-content: space-between;
-
-    color: var(--muted);
-
-    font-size: 11px;
-
+    font-size: 28px;
     margin-bottom: 8px;
 }
 
-.progress {
-    height: 5px;
-
-    border-radius: 10px;
-
-    background: rgba(150,190,170,.08);
-
-    overflow: hidden;
+.time-calculator-text {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 600px;
 }
 
-.progress span {
+.time-calculator-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+    margin-top: 24px;
+    align-items: end;
+}
+
+.time-control label {
     display: block;
+    color: var(--muted);
+    font-size: 10px;
+    margin-bottom: 8px;
+}
 
-    width: 8%;
+.time-control select,
+.time-control input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 13px;
+    border-radius: 12px;
+    border: 1px solid rgba(185,220,200,.10);
+    background: rgba(10,17,13,.55);
+    color: var(--text);
+    font: inherit;
+    outline: none;
+}
 
-    height: 100%;
+.time-control select:focus,
+.time-control input:focus {
+    border-color: rgba(185,220,200,.25);
+}
 
-    border-radius: inherit;
+.time-convert-button {
+    white-space: nowrap;
+}
 
+.time-result {
+    margin-top: 20px;
+    padding: 22px;
+    border-radius: 18px;
+    background: rgba(185,220,200,.035);
+    border: 1px solid rgba(185,220,200,.07);
+    text-align: center;
+}
+
+.time-result-label {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.time-result-value {
+    margin-top: 4px;
+    font-size: 36px;
+    color: var(--green-bright);
+    font-weight: 500;
+}
+
+.time-result-date {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   LITTLE GAME
+========================================================= */
+
+.game-section {
+    padding: 70px 0 150px;
+    text-align: center;
+}
+
+.game-section .section-description {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.game-box {
+    margin: 50px auto 0;
+    width: min(620px, 100%);
+    padding: 30px;
+    border-radius: 30px;
+    background: radial-gradient(circle at center, rgba(150,190,165,.055), rgba(10,17,13,.68) 62%);
+    border: 1px solid var(--border);
+}
+
+.game-field {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 22px;
     background:
-        linear-gradient(
-            90deg,
-            var(--green),
-            var(--pink),
-            var(--blue)
-        );
+        radial-gradient(circle at 50% 50%, rgba(166,201,217,.045), transparent 32%),
+        #080e0b;
+    border: 1px solid rgba(185,220,200,.07);
+    touch-action: none;
+}
+
+.game-light {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: none;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,225,238,.8) 0%, rgba(210,168,189,.32) 30%, rgba(166,201,217,.12) 58%, transparent 75%);
+    box-shadow: 0 0 45px rgba(210,168,189,.16);
+    cursor: pointer;
+}
+
+.game-light.visible {
+    display: block;
+}
+
+.game-message {
+    min-height: 22px;
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.game-stats strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.game-controls {
+    margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+    .time-calculator-controls {
+        grid-template-columns: 1fr;
+    }
+
+    .time-convert-button {
+        width: 100%;
+    }
 }
 
 
@@ -1564,7 +1634,7 @@ body.lights-out .time-section,
 body.lights-out .care-section,
 body.lights-out .breathe-section,
 body.lights-out .light-section,
-body.lights-out .dota-section,
+body.lights-out .game-section,
 body.lights-out .apology,
 body.lights-out .hard-section,
 body.lights-out footer {
@@ -1695,6 +1765,10 @@ body.lights-out .lights-button {
 
     .light-field {
         height: 320px;
+    }
+
+    .game-field {
+        height: 270px;
     }
 
 }
@@ -1948,7 +2022,7 @@ body.lights-out .lights-button {
             </strong>
 
             <span>
-                он всё ещё там, даже когда между нами двенадцать часов
+                он всё ещё там, даже когда между нами разное время
             </span>
 
         </div>
@@ -1978,18 +2052,18 @@ body.lights-out .lights-button {
     </div>
 
     <div class="section-title">
-        Двенадцать часов
+        Между нами
     </div>
 
     <div class="section-description">
 
-        Пока у тебя уже наступил новый день,
-        я всё ещё нахожусь в предыдущем.
+        У нас не всегда одинаковый день и не всегда
+        одинаковое время. Но узнать, когда сейчас
+        у другого, можно в один момент.
 
         <br><br>
 
-        Но есть вещи, которым совершенно
-        не важно, который сейчас час.
+        Сейчас разница: <strong id="timezoneGap">—</strong>.
 
     </div>
 
@@ -2032,6 +2106,53 @@ body.lights-out .lights-button {
                 —
             </small>
 
+        </div>
+
+    </div>
+
+
+    <div class="time-calculator">
+
+        <div class="time-calculator-title">
+            Когда у нас?
+        </div>
+
+        <div class="time-calculator-text">
+            Выбери, чьё время ты знаешь, введи его - и посмотри,
+            сколько в этот момент будет у другого.
+        </div>
+
+        <div class="time-calculator-controls">
+
+            <div class="time-control">
+                <label for="timePerson">У кого это время?</label>
+                <select id="timePerson">
+                    <option value="kira">У Киры · Красноярск</option>
+                    <option value="pavel">У Павла · Нью-Йорк</option>
+                </select>
+            </div>
+
+            <div class="time-control">
+                <label for="timeInput">Время</label>
+                <input id="timeInput" type="time" value="12:00">
+            </div>
+
+            <button class="soft-button time-convert-button" onclick="convertTime()">
+                узнать →
+            </button>
+
+        </div>
+
+        <div class="time-result">
+            <div class="time-result-label" id="timeResultLabel">
+                У другого человека будет
+            </div>
+            <div class="time-result-value" id="timeResultValue">
+                00:00
+            </div>
+            <div class="time-result-date" id="timeResultDate">
+                —
+            </div>
         </div>
 
     </div>
@@ -2291,72 +2412,50 @@ body.lights-out .lights-button {
 
 
 <!-- =======================================================
-     DOTA
+     LITTLE GAME
 ======================================================= -->
 
-<section class="dota-section">
+<section class="game-section">
 
     <div class="section-number">
-        06 · НОВАЯ ИГРА
+        06 · МАЛЕНЬКАЯ ИГРА
     </div>
 
     <div class="section-title">
-        Учитель найден
+        Поймай свет
     </div>
 
     <div class="section-description">
 
-        Я скачал Dota 2.
+        Никаких сложных правил.
+        Просто найди маленький свет и нажми на него.
 
         <br><br>
 
-        Теперь мне остаётся только пережить
-        обучение от человека, который уже знает,
-        насколько плохо я умею играть.
+        Двадцать секунд. Потом можно снова ничего не делать.
 
     </div>
 
 
-    <div class="dota-card">
+    <div class="game-box">
 
-        <div class="dota-title">
-            Уроки от Киры
+        <div class="game-field" id="gameField">
+            <div class="game-light" id="gameLight" onclick="catchLight(event)"></div>
         </div>
 
-        <div class="dota-text">
-
-            Здесь будут появляться наши первые
-            игры, герои, билды, ошибки, победы
-            и всё остальное, чему ты меня научишь.
-
-            <br><br>
-
-            Пока прогресс выглядит примерно так:
-
+        <div class="game-message" id="gameMessage">
+            когда захочешь - начинай
         </div>
 
+        <div class="game-stats">
+            <span>свет: <strong id="gameScore">0</strong></span>
+            <span>время: <strong id="gameTimer">20</strong></span>
+        </div>
 
-        <div class="dota-progress">
-
-            <div class="progress-label">
-
-                <span>
-                    способность понимать, что происходит
-                </span>
-
-                <span>
-                    8%
-                </span>
-
-            </div>
-
-
-            <div class="progress">
-
-                <span></span>
-
-            </div>
-
+        <div class="game-controls">
+            <button class="soft-button" onclick="startLightGame()">
+                начать игру
+            </button>
         </div>
 
     </div>
@@ -2499,13 +2598,6 @@ const MY_TIMEZONE =
     "America/New_York";
 
 
-/*
-    Сейчас поставлено UTC+8.
-
-    Если Кира находится в другом часовом поясе,
-    здесь можно поменять значение.
-*/
-
 const HER_TIMEZONE =
     "Asia/Krasnoyarsk";
 
@@ -2608,6 +2700,193 @@ function updateTime() {
 updateTime();
 
 setInterval(updateTime, 1000);
+
+
+/* =========================================================
+   TIME CALCULATOR
+========================================================= */
+
+function getZoneParts(timezone, date) {
+
+    const parts = new Intl.DateTimeFormat(
+        "en-US",
+        {
+            timeZone: timezone,
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+            hour: "2-digit",
+            minute: "2-digit",
+            hourCycle: "h23"
+        }
+    ).formatToParts(date);
+
+    const result = {};
+
+    parts.forEach(part => {
+        if (part.type !== "literal") {
+            result[part.type] = Number(part.value);
+        }
+    });
+
+    return result;
+}
+
+
+function getZoneOffsetMinutes(timezone, date) {
+
+    const p = getZoneParts(timezone, date);
+
+    const asUTC = Date.UTC(
+        p.year,
+        p.month - 1,
+        p.day,
+        p.hour,
+        p.minute
+    );
+
+    return Math.round(
+        (asUTC - date.getTime()) / 60000
+    );
+}
+
+
+function wallTimeToDate(timezone, year, month, day, hour, minute) {
+
+    let guess = Date.UTC(
+        year,
+        month - 1,
+        day,
+        hour,
+        minute
+    );
+
+    for (let i = 0; i < 5; i++) {
+
+        const offset =
+            getZoneOffsetMinutes(
+                timezone,
+                new Date(guess)
+            );
+
+        guess = Date.UTC(
+            year,
+            month - 1,
+            day,
+            hour,
+            minute
+        ) - offset * 60000;
+    }
+
+    return new Date(guess);
+}
+
+
+function updateTimezoneGap() {
+
+    const now = new Date();
+
+    const kiraOffset =
+        getZoneOffsetMinutes(
+            HER_TIMEZONE,
+            now
+        );
+
+    const pavelOffset =
+        getZoneOffsetMinutes(
+            MY_TIMEZONE,
+            now
+        );
+
+    const hours =
+        Math.abs(kiraOffset - pavelOffset) / 60;
+
+    const gap = document.getElementById("timezoneGap");
+
+    if (gap) {
+        gap.textContent =
+            hours + " " +
+            (hours === 1 ? "час" : "часов");
+    }
+
+}
+
+
+function convertTime() {
+
+    const person =
+        document.getElementById("timePerson").value;
+
+    const input =
+        document.getElementById("timeInput").value;
+
+    if (!input) return;
+
+    const [hour, minute] =
+        input.split(":").map(Number);
+
+    const sourceZone =
+        person === "kira"
+            ? HER_TIMEZONE
+            : MY_TIMEZONE;
+
+    const targetZone =
+        person === "kira"
+            ? MY_TIMEZONE
+            : HER_TIMEZONE;
+
+    const sourceName =
+        person === "kira" ? "Киры" : "Павла";
+
+    const targetName =
+        person === "kira" ? "Павла" : "Киры";
+
+    const now = new Date();
+    const sourceParts =
+        getZoneParts(sourceZone, now);
+
+    const date = wallTimeToDate(
+        sourceZone,
+        sourceParts.year,
+        sourceParts.month,
+        sourceParts.day,
+        hour,
+        minute
+    );
+
+    const targetParts =
+        getZoneParts(targetZone, date);
+
+    document.getElementById("timeResultLabel")
+        .textContent =
+        `У ${targetName} будет`;
+
+    document.getElementById("timeResultValue")
+        .textContent =
+        String(targetParts.hour).padStart(2, "0") +
+        ":" +
+        String(targetParts.minute).padStart(2, "0");
+
+    const targetDate = new Intl.DateTimeFormat(
+        "ru-RU",
+        {
+            timeZone: targetZone,
+            weekday: "long",
+            day: "numeric",
+            month: "long"
+        }
+    ).format(date);
+
+    document.getElementById("timeResultDate")
+        .textContent =
+        targetDate + " · если у " + sourceName + " " + input;
+
+}
+
+
+updateTimezoneGap();
+setInterval(updateTimezoneGap, 60000);
+convertTime();
 
 
 /* =========================================================
@@ -2988,6 +3267,88 @@ function createParticle(clientX, clientY) {
 
     }, 2300);
 
+}
+
+
+/* =========================================================
+   LITTLE LIGHT GAME
+========================================================= */
+
+let gameRunning = false;
+let gameScore = 0;
+let gameTime = 20;
+let gameInterval = null;
+
+
+function startLightGame() {
+
+    clearInterval(gameInterval);
+
+    gameRunning = true;
+    gameScore = 0;
+    gameTime = 20;
+
+    document.getElementById("gameScore").textContent = gameScore;
+    document.getElementById("gameTimer").textContent = gameTime;
+    document.getElementById("gameMessage").textContent = "найди свет";
+
+    placeGameLight();
+
+    gameInterval = setInterval(() => {
+
+        gameTime--;
+        document.getElementById("gameTimer").textContent = gameTime;
+
+        if (gameTime <= 0) {
+            stopLightGame();
+        }
+
+    }, 1000);
+}
+
+
+function placeGameLight() {
+
+    const field = document.getElementById("gameField");
+    const light = document.getElementById("gameLight");
+
+    const padding = 28;
+    const x = padding + Math.random() * (field.clientWidth - padding * 2);
+    const y = padding + Math.random() * (field.clientHeight - padding * 2);
+
+    light.style.left = x + "px";
+    light.style.top = y + "px";
+    light.classList.add("visible");
+}
+
+
+function catchLight(event) {
+
+    event.stopPropagation();
+
+    if (!gameRunning) return;
+
+    gameScore++;
+
+    document.getElementById("gameScore").textContent = gameScore;
+
+    placeGameLight();
+}
+
+
+function stopLightGame() {
+
+    clearInterval(gameInterval);
+    gameRunning = false;
+
+    document.getElementById("gameLight")
+        .classList.remove("visible");
+
+    document.getElementById("gameMessage")
+        .textContent =
+        gameScore > 0
+            ? `Ты нашёл свет ${gameScore} раз. Этого достаточно.`
+            : "Свет всё равно здесь. Можно попробовать ещё раз.";
 }
 
 
